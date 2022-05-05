@@ -1,0 +1,3 @@
+*.o
+popen_simplified_test
+popen2_test
