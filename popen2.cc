@@ -19,7 +19,10 @@ static std::list<subprocess_t> opened_processes;
 subprocess_t popen2(const char* program)
 {
     subprocess_t subprocess;
-    // although already initialized (in C++), but maybe not what we want
+    // Although already default-initialized in C++, these POD fields have NOT
+    // been initialized in reality (some random values on the stack might be
+    // assigned to them though, if we try to access them). See also
+    // https://stackoverflow.com/questions/72198503/why-is-a-file-pointer-zero-initialized-in-cs-default-initialization
     init_subprocess(&subprocess);
     // We will need 2 pipes in order to communicate between parent and child.
     // If only using 1 pipe, both child and parent will hold two ends of the
